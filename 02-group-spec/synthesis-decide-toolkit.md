@@ -2,43 +2,35 @@
 
 Dùng sau khi nhóm đã có evidence. Mục tiêu là chốt một build slice đủ nhỏ cho Day 06.
 
+**Nhóm D3 — Track E: Healthcare**
+1. Cao Đặng Quốc Vương — 2A202600738
+2. Nguyễn Thành Vinh — 2A202600971
+3. Giáp Minh Hiếu — 2A202600667
+
 ## 1. Gom evidence thành cụm
 
 Gom theo **workflow/pain**, không gom theo tên feature.
 
-Ví dụ cụm tốt:
-
-- "Không biết chọn chuyên khoa"
-- "Không hiểu vì sao bị tính phí"
-- "Muốn sửa output nhưng không có chỗ sửa"
-- "Bot trả lời tự tin nhưng không dẫn nguồn"
+- **Cụm 1 — Không hiểu thuốc:** "Bác sĩ kê toa xong về đọc trên mạng chẳng hiểu gì" + "Google search ra toàn thuật ngữ y khoa" + "ChatGPT trả lời chung chung"
+- **Cụm 2 — Không biết lịch uống:** "1 ngày uống 4-5 loại, không biết cái nào trước cái nào sau" + "BS nói nhanh quá quên mất"
+- **Cụm 3 — Lo tương tác thuốc:** "Uống Atorvastatin với Metformin có sao không" + "Tự search không có kết quả rõ ràng"
+- **Cụm 4 — Dễ chọn sai:** Self-use test: chọn nhầm Amlodipine 10mg thay vì 5mg + không có chỗ sửa
+- **Cụm 5 — LLM không đáng tin cậy:** Competitor analysis: ChatGPT có thể hallucinate về thuốc, nguy hiểm nếu user tin tưởng
 
 ## 2. Viết insight
 
-Form:
-
 ```text
-User [segment] không chỉ cần [surface need].
-Họ thật ra cần [deeper need],
-vì [evidence pattern].
-```
-
-Ví dụ:
-
-```text
-Người lần đầu đi khám không chỉ cần danh sách chuyên khoa.
-Họ cần hỗ trợ ra quyết định an toàn,
-vì nhiều review/observation cho thấy họ không biết triệu chứng của mình nên đi khoa nào.
+User [bệnh nhân mua thuốc tại Long Châu] không chỉ cần [tra cứu thông tin thuốc].
+Họ thật ra cần [một người phiên dịch đáng tin cậy — dịch từ "ngôn ngữ y khoa" sang "ngôn ngữ thường ngày", cá nhân hóa cho đơn thuốc của họ],
+vì [evidence cho thấy Google search ra thông tin kỹ thuật, dược sĩ không đủ thời gian, và họ lo lắng về tương tác/lịch uống].
 ```
 
 ## 3. Viết opportunity
 
-Form:
-
 ```text
-Cơ hội là dùng AI để [augment/automate hành động hẹp],
-giúp user [kết quả],
-trong khi vẫn kiểm soát [failure/risk].
+Cơ hội là dùng AI để [augment: search + giải thích + timeline + tương tác],
+giúp user [hiểu đơn thuốc trong 3 giây — không cần Google],
+trong khi vẫn kiểm soát [LLM hallucinate bằng Drug DB làm source of truth, safety layer "hỏi dược sĩ" cho case không chắc].
 ```
 
 ## 4. Chọn build slice
@@ -47,39 +39,43 @@ Build slice tốt phải qua 5 câu hỏi:
 
 | Câu hỏi | Đạt khi |
 |---|---|
-| User cụ thể chưa? | Nói được ai dùng, trong bối cảnh nào. |
-| Task đủ hẹp chưa? | Demo được trong 3-5 phút. |
-| AI decision rõ chưa? | AI gợi ý/tự làm một việc cụ thể. |
-| Failure path rõ chưa? | Có một case AI không chắc hoặc sai để test. |
-| Có evidence không? | Có bằng chứng từ self-use/review/user/competitor. |
+| User cụ thể chưa? | ✅ Bệnh nhân Long Châu, người lớn tuổi / mẹ bỉm sữa |
+| Task đủ hẹp chưa? | ✅ Chỉ search → giải thích → timeline (không OCR, không đặt thuốc, không push notification) |
+| AI decision rõ chưa? | ✅ Augmentation: AI search + giải thích, user quyết |
+| Failure path rõ chưa? | ✅ LLM timeout → DB fallback. LLM hallucinate → safety layer. Không tìm thấy → browse nhóm |
+| Có evidence không? | ✅ Self-use (7 observations) + user review (5 quotes) + competitor (6 đối thủ) |
 
 ## 5. Quyết định: giữ, giảm scope, hay đổi hướng?
 
 | Tình huống | Quyết định |
 |---|---|
-| Evidence yếu, user mơ hồ | Dừng build sâu; quay lại research 20 phút. |
-| Ý tưởng quá rộng | Giữ domain, cắt xuống một flow. |
-| AI không cần thiết | Dùng rule/manual prototype; ghi rõ vì sao không dùng AI sâu. |
-| Rủi ro cao | Chọn augmentation hoặc conditional automation. |
-| Không demo được trong 1 ngày | Đưa phần lớn vào backlog, giữ một path nhỏ. |
+| Evidence yếu, user mơ hồ | — |
+| Ý tưởng quá rộng | ✅ **Giảm scope:** Không OCR, không push notification, không voice. Chỉ search + giải thích + timeline + interaction |
+| AI không cần thiết | — |
+| Rủi ro cao | ✅ **Chọn augmentation:** AI chỉ giải thích, user quyết. Safety layer "hỏi dược sĩ" cho case nguy hiểm |
+| Không demo được trong 1 ngày | ✅ **Cắt:** Giữ 4 paths (happy/low-confidence/failure/correction), bỏ feedback path nếu không đủ thời gian |
 
 ## 6. Câu chốt cuối
 
 Điền câu này trước khi rời lớp:
 
 ```text
-Dựa trên [evidence],
-nhóm sẽ build [prototype slice],
-cho [user],
-để giải quyết [pain],
-bằng cách AI [augment/automate task],
-và sẽ test failure path [failure mode].
+Dựa trên [self-use test + user review + competitor analysis],
+nhóm sẽ build [AI giải thích đơn thuốc — search → giải thích → timeline → tương tác],
+cho [bệnh nhân mua thuốc tại Long Châu],
+để giải quyết [không hiểu đơn thuốc — không biết uống lúc nào, có tương tác không, tác dụng phụ gì],
+bằng cách AI [augment: search fuzzy match + LLM giải thích đơn giản + timeline tự động + cảnh báo tương tác],
+và sẽ test failure path [LLM hallucinate / timeout / sai liều / không tìm thấy thuốc].
 ```
 
 ## 7. Backlog
 
 Những thứ **không build trong Day 06**:
 
-- 
-- 
-- 
+- OCR scan đơn thuốc (cần model nhận dạng tiếng Việt, phức tạp)
+- Push notification nhắc uống thuốc (cần mobile app + background service)
+- Voice input/output (cần speech-to-text tiếng Việt)
+- Đặt thuốc online (cần integration với Long Châu POS)
+- User authentication / login (không cần cho demo)
+- Drug interaction database đầy đủ (chỉ làm 300+ cặp phổ biến nhất)
+- Dược sĩ chat real-time (cần staffing)
