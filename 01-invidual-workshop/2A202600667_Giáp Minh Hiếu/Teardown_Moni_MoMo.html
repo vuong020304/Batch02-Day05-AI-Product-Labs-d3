@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Mổ Xẻ Sản Phẩm AI - Moni (MoMo)</title>
+    <style>
+        :root {
+            --primary: #D82D8B; /* MoMo Pink */
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1em;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-top: 0;
+            color: #111827;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .step-badge {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        
+        /* Chat UI Mockup */
+        .chat-container {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 450px;
+            margin: 20px auto;
+            border: 1px solid var(--border);
+        }
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+        .msg-user {
+            background: #D82D8B;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .msg-bot {
+            background: white;
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid var(--border);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        /* Flow Layout */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .flow-box {
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .flow-as-is {
+            background-color: #FEF2F2;
+            border-color: #FCA5A5;
+        }
+        .flow-to-be {
+            background-color: #F0FDF4;
+            border-color: #86EFAC;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #DC2626;
+        }
+        .success {
+            font-weight: bold;
+            color: #16A34A;
+        }
+        
+        /* Decision Box */
+        .decision-box {
+            background: #FFFBEB;
+            border-left: 5px solid #F59E0B;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.1em;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Workshop: Mổ Xẻ Sản Phẩm AI</h1>
+        <p>Phân tích luồng hội thoại & Quyết định sản phẩm (Product Decision)</p>
+        <p><strong>Case Study:</strong> Trợ thủ AI - Moni (MoMo)</p>
+    </div>
+
+    <!-- Bước 1 -->
+    <div class="card">
+        <h2><span class="step-badge">Bước 1</span> Dùng thử (Reality Check)</h2>
+        <p><strong>Mục tiêu:</strong> Kiểm tra khả năng xử lý lệnh thao tác dữ liệu (Data Manipulation) của AI với một dữ liệu ảo (không tồn tại trong lịch sử giao dịch).</p>
+        
+        <div class="chat-container">
+            <div class="message msg-user">
+                cái giao dịch 1tr5 ở kichi hômmqua là tôi quẹt hộ công ty, không tính vào chi tiêu cá nhân hiểu chưa
+            </div>
+            <div class="message msg-bot">
+                Tôi đã hiểu, giao dịch 1 triệu 5 ở Kichi hôm qua là quẹt hộ công ty, không tính vào chi tiêu cá nhân của bạn. Bạn muốn tôi giúp bỏ khoản đó ra khỏi báo cáo chi tiêu cá nhân không?
+            </div>
+            <div class="message msg-user">
+                oke bỏ khoản đó đi
+            </div>
+            <div class="message msg-bot">
+                Đã nhận yêu cầu loại bỏ giao dịch <strong>1.500.000đ</strong> ở Kichi hôm qua khỏi chi tiêu cá nhân. Tuy nhiên, hiện tại hệ thống đang gặp lỗi, chưa thể xóa giao dịch này ngay.<br><br>Bạn có thể thử lại sau hoặc nhấn...
+            </div>
+        </div>
+    </div>
+
+    <!-- Bước 2 & 3 -->
+    <div class="card">
+        <h2><span class="step-badge">Bước 2 & 3</span> Vẽ Flow & Sửa Path Yếu Nhất</h2>
+        <div class="flow-grid">
+            <!-- As-is -->
+            <div class="flow-box flow-as-is">
+                <h3 class="highlight">❌ As-is (Trạng thái hiện tại)</h3>
+                <p><em>Lỗi: Ảo giác thao tác (Action Hallucination) & Đứt gãy hệ thống.</em></p>
+                <ol>
+                    <li><strong>User:</strong> Nhập lệnh yêu cầu xóa một giao dịch ảo.</li>
+                    <li><strong>Moni (LLM):</strong> Bỏ qua bước kiểm chứng DB (Data Grounding), vội vàng hứa hẹn và hỏi xác nhận.</li>
+                    <li><strong>User:</strong> Đồng ý ("oke bỏ khoản đó đi").</li>
+                    <li><strong>Moni (Backend):</strong> Gửi request xóa -> Backend không tìm thấy ID giao dịch -> Trả lỗi 500/404.</li>
+                    <li><strong>Moni (Fallback):</strong> Báo "Hệ thống đang lỗi".</li>
+                </ol>
+                <p class="highlight">⚠️ User kẹt ở đâu: Bối rối, mất niềm tin vào độ ổn định của hệ thống tài chính MoMo.</p>
+            </div>
+
+            <!-- To-be -->
+            <div class="flow-box flow-to-be">
+                <h3 class="success">✅ To-be (Thiết kế đề xuất)</h3>
+                <p><em>Giải pháp: Xác thực dữ liệu trước & Cung cấp lối thoát (UI Suggestion).</em></p>
+                <ol>
+                    <li><strong>User:</strong> Nhập lệnh yêu cầu xóa một giao dịch ảo.</li>
+                    <li><strong>Moni (Backend Check):</strong> Quét Database -> Kết quả: <code>Null</code>.</li>
+                    <li><strong>Moni (Smart Fallback):</strong> "Moni đã rà soát nhưng không tìm thấy giao dịch 1.500.000đ nào tại Kichi Kichi vào hôm qua."</li>
+                    <li><strong>Moni (UI Component):</strong> "Có thể bạn nhớ nhầm thông tin? Dưới đây là các giao dịch ăn uống gần nhất:"</li>
+                    <li><strong>UI Action:</strong> Hiển thị <strong>Carousel 3 thẻ giao dịch</strong> thực tế gần nhất kèm nút <code>[Loại trừ]</code> trên mỗi thẻ.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bước 4 -->
+    <div class="card">
+        <h2><span class="step-badge">Output</span> Product Decision</h2>
+        <div class="decision-box">
+            "Đối với các tác vụ làm thay đổi trạng thái dữ liệu (Update/Delete), tuyệt đối không cho phép LLM tự ý sinh ra luồng xác nhận (Confirmation Flow) nếu chưa truy xuất được đối tượng dữ liệu thực tế (Data Grounding). Khi xảy ra lỗi sai lệch thông tin từ phía user, AI phải bẻ lái sang luồng UI Gợi ý (Suggestion List) để user tự rà soát và thao tác, thay vì ném ra một thông báo 'Hệ thống lỗi' gây tổn hại đến niềm tin (Trust) của sản phẩm tài chính."
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
